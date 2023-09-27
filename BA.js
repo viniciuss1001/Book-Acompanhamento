@@ -3,7 +3,7 @@ const containerName = document.getElementById("containerName")//div geral do aco
 var userName = document.getElementById("userName") //coletar o nome do usuário
 var writerUserName = document.getElementById("namedUser") //colocar o nome do usuário na página inicial
 var res = document.getElementById("res") //alerta caso a caixa esteja vazia
-
+ const bookContainer = document.getElementById("homeBook")//seçaõ geral do livro
 //liberar o botão somente quando a caixa estiver preechida
 var buttonOk = document.getElementById("nextButton") //botão para prosseguir a navegação
 
@@ -33,6 +33,22 @@ changeName()
 
 //função para a criação dos livros
 function createbook(){
+        //função para criar um novo livro
+    function newBook(){
+        $(bookContainer).append(`
+        <div class="cardContainer">
+            <img src="Assets/book.png" alt="" class="capeImg" id="capeImg">
+            <h2 class="cardTitle" id="cardTitle">Título</h2>
+            <h3 class="cardAutor" id="cardAutor">Autor</h3>
+    
+            <p class="cardReadPages" id="cardReadPages">00</p>
+            <p class="cardTotalPages" id="cardTotalPages">00</p>
+            <p class="toConcluseBook" id="toConcluseBook">00páginas</p>
+            <div class="progressBar" id="progressBar"></div>
+        </div>
+        `)
+    }newBook()
+
     var titleBook = document.getElementById("bookTitle")//título do livro
     var autorBook = document.getElementById("autorLivro")//autor do livro
     var totalPages = document.getElementById("NunPaginasTot") // número total de páginas 
@@ -99,3 +115,6 @@ function createbook(){
         writer()
     }
 }
+boo
+
+
