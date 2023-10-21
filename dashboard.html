@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="dashBa.css">
+    <link rel="stylesheet" href="dashboard.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
@@ -13,35 +13,25 @@
         <div class="bookContainer" id="bookContainer">
             <div class="titleBook">
                 <h2>Olá!</h2>
-                <h3 id="namedUser">Olá seja bem vindo</h3>
-                
             </div>
             <div class="bodyBook" id="bodyBook">
                 <h6>Insira abaixo os dados do seu livro</h6>
+                <div id="bookWarning"></div>
                 <p class="alertText"></p>
                 <input type="text" name="" id="bookTitle" placeholder="Título do Livro" class="bookInput" required>
                 <input type="text" name="" id="autorLivro" placeholder="Nome do autor" class="bookInput" required>
-                <input type="text" name="" id="NunPaginasTot" placeholder="Número total de páginas" class="bookInput" required>
-                <input type="text" name="" id="NunPaginasLidas" placeholder="Número de páginas lidas" class="bookInput" required>
+                <input type="number" name="" id="NunPaginasTot" placeholder="Número total de páginas" class="bookInput" required>
+                <input type="number" name="" id="NunPaginasLidas" placeholder="Número de páginas lidas" class="bookInput" required>
             </div>
-            <button onclick="createbook()">Criar Livro</button>
+            <button id="createBook">Criar Livro</button>
         </div>
-        <!--
-           <div class="cardContainer">
-            <img src="Assets/book.png" alt="" class="capeImg" id="capeImg">
-            <h2 class="cardTitle" id="cardTitle">Título</h2>
-            <h3 class="cardAutor" id="cardAutor">Autor</h3>
-
-            <p class="cardReadPages" id="cardReadPages">00</p>
-            <p class="cardTotalPages" id="cardTotalPages">00</p>
-            <p class="toConcluseBook" id="toConcluseBook">00páginas</p>
-            <div class="progressBar" id="progressBar"></div>
-        </div> 
-        -->
+        <div class="bookContainer" id="userBooks">
+            
+        </div>
         
     </section>
     <script src="jquery.js"></script>
-    <script src="BA.js"></script>
+    <script src="index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>

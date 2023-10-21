@@ -1,68 +1,64 @@
-    //variáveis globais
+
+ //variáveis globais
+var livros = []
+var user = []
 const containerName = document.getElementById("containerName")//div geral do acompanhamento
-var userName = document.getElementById("userName") //coletar o nome do usuário
+const userName = document.getElementById("userName") //coletar o nome do usuário
 var writerUserName = document.getElementById("namedUser") //colocar o nome do usuário na página inicial
-var res = document.getElementById("res") //alerta caso a caixa esteja vazia
- const bookContainer = document.getElementById("homeBook")//seçaõ geral do livro
+const bookContainer = document.getElementById("homeBook")//seçaõ geral do livro
 //liberar o botão somente quando a caixa estiver preechida
-var buttonOk = document.getElementById("nextButton") //botão para prosseguir a navegação
+var nextButton = document.getElementById("nextButton") //botão para prosseguir a navegação
+//função de bem vindo
 
-writerUserName.innerText = `Olá, seja bem vindo ${userName.value}` 
-function nameUser(){
-    var userNameNumber = Number(userName.value);
-    console.log(userNameNumber)
-
-    if(userNameNumber < 1){
-        res.innerText = "Nome do usuário não pode ficar vazio"
-        res.style.color = "red"
-        buttonOk.style.display = "none"
+userName.addEventListener("change", function(){
+    const divRes = document.getElementById("res");
+    let useraNameLength = Number(userName)
+    console.log(useraNameLength)
+    //validação no nome do usuário
+    if(useraNameLength < 1){
+        divRes.innerHTML = `Ainda não foi possível validar seu nome`
+        divRes.style.color = `red`
+        $(".res").fadeIn()
     }else{
-        res.innerText = "Tudo ok, pode prosseguir"
-        res.style.color = "green"
-        buttonOk.style.display = "flex"
+        divRes.innerHTML = `Olá ${userName.value} seja Bem-vindo!`
+        divRes.style.color = "green"
+        $(".red").fadeIn()
+        nextButton.style.display = "block"
     }
-}
-nameUser()
+})
 
-/*função para mudar o nome do usuário */
-function changeName(){
-    writerUserName.innerHTML = userName.value;
-    console.log(containerName)
-}
-changeName()
 
 //função para a criação dos livros
-function createbook(){
-        //função para criar um novo livro
-    function newBook(){
-        $(bookContainer).append(`
-        <div class="cardContainer">
-            <img src="Assets/book.png" alt="" class="capeImg" id="capeImg">
-            <h2 class="cardTitle" id="cardTitle">Título</h2>
-            <h3 class="cardAutor" id="cardAutor">Autor</h3>
-    
-            <p class="cardReadPages" id="cardReadPages">00</p>
-            <p class="cardTotalPages" id="cardTotalPages">00</p>
-            <p class="toConcluseBook" id="toConcluseBook">00páginas</p>
-            <div class="progressBar" id="progressBar"></div>
-        </div>
-        `)
-    }newBook()
-
-    var titleBook = document.getElementById("bookTitle")//título do livro
-    var autorBook = document.getElementById("autorLivro")//autor do livro
+document.getElementById("createBook").addEventListener("click", function(){
+    var titleBook = document.getElementById("bookTitle").value//título do livro
+    var autorBook = document.getElementById("autorLivro").value//autor do livro
     var totalPages = document.getElementById("NunPaginasTot") // número total de páginas 
-    var readPages = document.getElementById("NunPaginasLidas")
-
-    //validação se há componentes vazios
-    const titleBookN = Number(titleBook.value);
-    const autorBookN = Number(autorBook.value);
-    const totalPagesN = Number(totalPages.value);
-    const readPagesN = Number(readPages.value);
-
-    var inputAlert = document.querySelectorAll(".bookInput") //inputs para aletração
-    var alertText = document.querySelector(".alertText")
-    
+    var readPages = document.getElementById("NunPaginasLidas")//quantidade de páginas lidas
+    const warningText = document.getElementById("bookWarning")
+    //para ocultar o botão 
+    const btnCreateBook = document.getElementById("createBook")
+    //validação se há campos vazios
+    if(titleBook.length == 0 || autorBook.length == 0 || totalPages.length == 0 || readPages.length ==0){
+        warningText.innerHTML = `Nenhum campo pode ficar vazio`
+        warningText.style.color = "red"
+        btnCreateBook.style.display = "none"
+    }else if(readPages.length > totalPages.length){
+        warningText.innerHTML = `O número de páginas é menor que as páginas lidas!`
+        warningText.style.color = 'royalblue'
+        btnCreateBook.style.display = "none"
+    }else{
+        //para colocar o livro no array
+        livros.push({
+            nome: titleBook.value,
+            autor: autorBook.value,
+            pages: totalPages.value,
+            readedPages: readPages.value
+        })
+        
+        let listBooks = document.getElementById("userBooks")
+    }
+})
+/*
     if(titleBookN < 1||autorBookN < 1||totalPagesN<1||readPagesN<1){
         //alerta em forma de texto
         alertText.innerHTML = "Nenhum campo pode ficar vazio";
@@ -115,6 +111,5 @@ function createbook(){
         writer()
     }
 }
-boo
-
+*/
 
