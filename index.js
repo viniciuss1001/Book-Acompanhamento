@@ -13,6 +13,7 @@ var nextButton = document.getElementById("nextButton") //botão para prosseguir 
 function nameValidation(){
     const divRes = document.getElementById("res");
     let useraNameLength = Number(userName)
+    console.log(userName.value)
     console.log(useraNameLength)
     //validação no nome do usuário
     if(useraNameLength < 1){
@@ -20,10 +21,12 @@ function nameValidation(){
         divRes.style.color = `red`
         $(".res").fadeIn()
     }else{
-        divRes.innerHTML = `Olá ${userName.value} seja Bem-vindo!`
+        divRes.innerHTML = `Olá  seja Bem-vindo!`
         divRes.style.color = "green"
         $(".red").fadeIn()
         nextButton.style.display = "block"
+
+        //adição do usuário
     }
 }
 
