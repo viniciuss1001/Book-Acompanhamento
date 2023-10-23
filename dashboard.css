@@ -16,6 +16,7 @@
 .homeBook{
     width: 100%;
     height:100vh;
+    max-height: fit-content;
     background-color: var(--primary);
     padding: 1rem;
 }
@@ -93,4 +94,33 @@
     width: 1%;
     background-color: #00ff6a;
     
+}
+/*estilização do cartão com os livros*/
+.listBook{
+    display: flex;
+    width: 80%;
+    flex-wrap: wrap;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 0 auto;
+    background: #ffff;
+}
+.listBook .booKCard{
+    padding: 1rem;
+    border: none;
+    border-radius: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem auto;
+    background: #5089ec;
+    width: 33%;
+    color: #fff;
+}
+.listBook .listBookTitle{
+    background: #00ff6a;
+    color: white;
+    width: 100%;
+    text-align: center;
+    margin: 1rem auto;
 }

@@ -8,9 +8,9 @@ var writerUserName = document.getElementById("namedUser") //colocar o nome do us
 const bookContainer = document.getElementById("homeBook")//seçaõ geral do livro
 //liberar o botão somente quando a caixa estiver preechida
 var nextButton = document.getElementById("nextButton") //botão para prosseguir a navegação
-//função de bem vindo
+//função para validação do nome do usuário
 
-userName.addEventListener("change", function(){
+function nameValidation(){
     const divRes = document.getElementById("res");
     let useraNameLength = Number(userName)
     console.log(useraNameLength)
@@ -25,91 +25,69 @@ userName.addEventListener("change", function(){
         $(".red").fadeIn()
         nextButton.style.display = "block"
     }
-})
+}
 
 
 //função para a criação dos livros
-document.getElementById("createBook").addEventListener("click", function(){
+document.getElementById("createBook").addEventListener("click", function(e){
+    //window.alert("função disparou")
     var titleBook = document.getElementById("bookTitle").value//título do livro
     var autorBook = document.getElementById("autorLivro").value//autor do livro
-    var totalPages = document.getElementById("NunPaginasTot") // número total de páginas 
-    var readPages = document.getElementById("NunPaginasLidas")//quantidade de páginas lidas
+    var totalPages = document.getElementById("NunPaginasTot").value // número total de páginas 
+    var readPages = document.getElementById("NunPaginasLidas").value//quantidade de páginas lidas
     const warningText = document.getElementById("bookWarning")
     //para ocultar o botão 
     const btnCreateBook = document.getElementById("createBook")
+
+    console.log(titleBook, autorBook, totalPages, readPages)
     //validação se há campos vazios
-    if(titleBook.length == 0 || autorBook.length == 0 || totalPages.length == 0 || readPages.length ==0){
+    
+    if(titleBook == "" || autorBook == "" || totalPages == 0 || readPages == 0){
         warningText.innerHTML = `Nenhum campo pode ficar vazio`
         warningText.style.color = "red"
-        btnCreateBook.style.display = "none"
-    }else if(readPages.length > totalPages.length){
+        //btnCreateBook.style.display = "none"
+    }else if(readPages > totalPages){
         warningText.innerHTML = `O número de páginas é menor que as páginas lidas!`
         warningText.style.color = 'royalblue'
-        btnCreateBook.style.display = "none"
+        //btnCreateBook.style.display = "none"
     }else{
+        //validar a largura da barra de progresso de acordo com cada livro
+        let progressBar = document.getElementById("progressBar")
+        var widthBar = (readPages / totalPages) * 100;
+
         //para colocar o livro no array
         livros.push({
-            nome: titleBook.value,
-            autor: autorBook.value,
-            pages: totalPages.value,
-            readedPages: readPages.value
-        })
-        
-        let listBooks = document.getElementById("userBooks")
-    }
-})
-/*
-    if(titleBookN < 1||autorBookN < 1||totalPagesN<1||readPagesN<1){
-        //alerta em forma de texto
-        alertText.innerHTML = "Nenhum campo pode ficar vazio";
-        alertText.style.color = "red";
-        //mudança de borda dos inputs
-        
-    }else if(totalPagesN < readPagesN){
-        //validação caso o usuário insira algum valor incorreto
-        alertText.innerHTML = "O número de páginas é menor que a quantidade de páginas lidas!"
-        alertText.style.color = "orange"
-    }else{
-        var cardTitleBook = document.getElementById("cardTitle"); //para escrever o título do livro
-        var cardAutorBook = document.getElementById("cardAutor");
-        var cardReadPages = document.getElementById("cardReadPages");
-        var cardTotalPages = document.getElementById("cardTotalPages");
-        var cardProgressBar = document.getElementById("progressBar");
-        var toConcluseBook = document.getElementById("toConcluseBook")
-        //mudanças de acordo com os dados do livro
-        var cardToConcluseBook = totalPagesN - readPagesN;
-        //alterar o tamanho da barra de acordo com o total de páginas lidas
-        var widthBar = (readPagesN /totalPagesN ) *100;
-        function writer(){
-            cardTitleBook.innerHTML = titleBook.value
-            cardAutorBook.innerText = autorBook.value
-            cardReadPages.innerText = `Você leu um total de ${readPagesN} páginas`
-            cardTotalPages.innerText = totalPagesN;
-            toConcluseBook.innerText = `Faltam ${cardToConcluseBook} páginas para concluir o livro`
+            nome: titleBook,
+            autor: autorBook,
+            pages: totalPages,
+            readedPages: readPages,
+            width: widthBar,
 
-            //alterar o tamanho da barra
-            if(widthBar < 10){
-                cardProgressBar.style.backgroundColor = "yellow"
-                cardProgressBar.style.width = "10%"
-            }else if( 20 > widthBar >= 10){
-                cardProgressBar.style.backgroundColor = "orange"
-                cardProgressBar.style.width = "20%"
-            }else if( 40 > widthBar >= 20){
-                cardProgressBar.style.backgroundColor = "greenyellow"
-                cardProgressBar.style.width = "40%"
-            }else if( 60 > widthBar >= 40){
-                cardProgressBar.style.backgroundColor = "#024d16"
-                cardProgressBar.style.width = "60%"
-            }else if( 80 > widthBar >= 60){
-                cardProgressBar.style.backgroundColor = "#016d1e"
-                cardProgressBar.style.width = "80%"
-            }else{
-                cardProgressBar.style.backgroundColor = "#00ff6a"
-                cardProgressBar.style.width = "100%"
-            }
-        }
-        writer()
+        })
+        //variável para ver quantas páginas faltam
+        let finalPages = Number(totalPages - readPages) 
+        console.log(finalPages)
+        //lista de livros
+        let listBooks = document.getElementById("userBooks")
+        
+        //para resetar os inputs do formulário
+        listBooks.innerHTML = ""
+
+
+        livros.map(function(val){
+            listBooks.innerHTML +=`
+            <div class="booKCard" id="bookCard">
+                <h4>`+val.nome+`</h4>
+                <h6>Autor: `+val.autor+`</h6>
+                <p>Páginas Lidas: `+val.readedPages+`</p>
+                <p>Páginas Totais: `+val.pages+`</p>
+                <p>Faltam: `+finalPages+` páginas</p>
+                <div class="cardProgressBar" id="progressBar" style="width: `+val.width+`%;"></div>
+            </div>
+            `
+            
+        })
     }
-}
-*/
+    console.log(livros)
+})
 
