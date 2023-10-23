@@ -26,7 +26,6 @@ function nameValidation(){
         $(".red").fadeIn()
         nextButton.style.display = "block"
 
-        //adição do usuário
     }
 }
 
